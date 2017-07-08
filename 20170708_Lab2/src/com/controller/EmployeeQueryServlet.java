@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by Nobody on 2017/7/8.
  */
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-public class NewServlet extends HttpServlet {
+@WebServlet(name = "EmployeeQueryServlet" ,urlPatterns = {"/EmployeeQueryServlet"})
+public class EmployeeQueryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
@@ -40,7 +40,7 @@ public class NewServlet extends HttpServlet {
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("employeeQuery.jsp");
-        requestDispatcher.forward(request,response);
+        requestDispatcher.forward(request, response);
 
         out.println("</body>");
     }

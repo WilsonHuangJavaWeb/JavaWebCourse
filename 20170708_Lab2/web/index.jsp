@@ -11,7 +11,7 @@
     <title>$Title$</title>
 </head>
 <body>
-<form action="/NewServlet" method="post">
+<form action="EmployeeQueryServlet" method="post">
     Employee ID：<input type="text" name="id"><br/>
     <input type="submit" value="查詢">
 </form>
