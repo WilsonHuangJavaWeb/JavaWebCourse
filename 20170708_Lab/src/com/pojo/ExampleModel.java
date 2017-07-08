@@ -14,7 +14,9 @@ public class ExampleModel {
         this.name = name;
     }
 
+
     public int getNameLength() {
+        System.out.println("getNameLength()...");
         return name.length();
     }
 }
