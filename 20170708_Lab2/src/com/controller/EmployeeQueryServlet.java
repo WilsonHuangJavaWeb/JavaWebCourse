@@ -43,22 +43,30 @@ public class EmployeeQueryServlet extends HttpServlet {
 
         String empID = request.getParameter("id");
         int id = Integer.parseInt(empID);
+
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://114.33.246.89:3306/user1", "user", "user");
-            PreparedStatement stmt = con.prepareStatement("select * FROM emp WHERE id=?");
-            stmt.setInt(1, id);
+            Class.forName("com.mysql.jdbc.Driver");//先載入MySQL驅動
+            Connection con = DriverManager.getConnection(//取得與資料庫的連結
+                    "jdbc:mysql://114.33.246.89:3306/user1",//連結資料庫的URL
+                    "user",//資料庫的登入帳號
+                    "user"//資料庫的登入密碼
+            );
+
+            PreparedStatement selectStatement = con.prepareStatement("select * FROM user1.emp WHERE id=?");
+            selectStatement.setInt(1, id);
+            ResultSet rs = selectStatement.executeQuery();
+
             Employee emp = null;
-            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 emp = new Employee();
                 emp.setId(rs.getInt("id"));
                 emp.setName(rs.getString("cname"));
             }
             request.setAttribute("emp", emp);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("employeeQuery.jsp");
         requestDispatcher.forward(request, response);
